@@ -15,7 +15,7 @@ The **frontend** directory contains a React + Vite application styled with Tailw
 2. **PostCard**
    - Displays individual post details (Title and Body) in a card layout.
 
-2. **PageDetailsPage**
+2. **PostDetailPage**
    - Displays detailed information of a selected post, including:
      - **Title**
      - **Body**
@@ -24,7 +24,7 @@ The **frontend** directory contains a React + Vite application styled with Tailw
 4. **SearchBar**
    - Provides search functionality to filter posts by title on the main page.
 
-5. **CreatePostPage**
+5. **CreatePost**
    - Allows users to add new posts with fields for **Title** and **Body**.
 
 6. **LoadingSpinner**
