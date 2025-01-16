@@ -20,3 +20,12 @@ export interface IComment {
 export interface SearchBarProps {
     onSearch: (query: string) => void;
 }
+
+export interface CreatePostProps {
+    addPost: (post: IPost) => void;
+}
+
+export interface PostsPageProps {
+    posts: IPost[];
+    setPosts: (posts: IPost[]) => void;
+}

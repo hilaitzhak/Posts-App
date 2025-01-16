@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import PostCard from "./PostCard";
-import { IPost } from "../interfaces/post";
+import { PostsPageProps } from "../interfaces/post";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
-function PostsPage() {
+function PostsPage({ posts, setPosts }: PostsPageProps) {
     const BASE_URL = 'https://jsonplaceholder.typicode.com';
-    const [ posts, setPosts ] = useState<IPost[]>([]);
     const [searchQuery, setSearchQuery] = useState('');
-    const [ loading, setLoading ] = useState<boolean>(false);
+    const [ loading, setLoading ] = useState<boolean>(true);
 
     useEffect(() => {
-        fetchPosts();
+        if (posts.length === 0) {
+            fetchPosts();
+        } else {
+            setLoading(false);
+        }
     }, [])
 
     const fetchPosts = async () => {
