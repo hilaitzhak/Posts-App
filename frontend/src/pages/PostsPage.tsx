@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import PostCard from "./PostCard";
+import PostCard from "../components/PostCard";
 import { PostsPageProps } from "../interfaces/post";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import SearchBar from "./SearchBar";
+import SearchBar from "../components/SearchBar";
 
 function PostsPage({ posts, setPosts }: PostsPageProps) {
     const BASE_URL = 'https://jsonplaceholder.typicode.com';
