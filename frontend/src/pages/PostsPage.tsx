@@ -4,8 +4,8 @@ import { PostsPageProps } from "../interfaces/interace";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import LoadingSpinner from "../components/LoadingSpinner";
+import Pagination from "../components/Pagination";
 
 function PostsPage({ posts, setPosts }: PostsPageProps) {
     const BASE_URL = 'https://jsonplaceholder.typicode.com';
@@ -26,7 +26,6 @@ function PostsPage({ posts, setPosts }: PostsPageProps) {
         try {
             const response = await axios.get(`${BASE_URL}/posts`);
             setPosts(response.data);
-            
         } catch (error) {
             console.error('Error fetching posts:', error);
         } finally {
@@ -43,22 +42,12 @@ function PostsPage({ posts, setPosts }: PostsPageProps) {
     const indexOfFirstProduct = indexOfLastProduct - postPerPage;
     const currentPosts = filteredPosts.slice(indexOfFirstProduct, indexOfLastProduct);
     const totalPages = Math.ceil(filteredPosts.length / postPerPage);
-
-    const handlePreviousPage = () => {
-        if (currentPage > 1) {
-          setCurrentPage(prev => prev - 1);
-          window.scrollTo(0, 0);
-        }
+    
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const handleNextPage = () => {
-        if (currentPage < totalPages) {
-            setCurrentPage(prev => prev + 1);
-            window.scrollTo(0, 0);
-        }
-    };
-
-      
     if (loading) {
         return (
             <LoadingSpinner/>
@@ -83,31 +72,7 @@ function PostsPage({ posts, setPosts }: PostsPageProps) {
                 ))}
             </div>
 
-            <div className="flex items-center justify-center gap-4 mt-6">
-                <button
-                    onClick={handlePreviousPage}
-                    className={`flex items-center justify-center gap-1 w-32 px-4 py-2 rounded-lg font-medium transition-all duration-200
-                        ${currentPage === 1
-                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                            : 'bg-blue-500 text-white hover:bg-blue-600 shadow-sm hover:shadow'
-                        }`}
-                >
-                    <ChevronLeft className="w-5 h-5" />
-                    Previous
-                </button>
-                
-                <button
-                    onClick={handleNextPage}
-                    className={`flex items-center justify-center gap-1 w-32 px-4 py-2 rounded-lg font-medium transition-all duration-200
-                        ${currentPage === totalPages
-                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                            : 'bg-blue-500 text-white hover:bg-blue-600 shadow-sm hover:shadow'
-                        }`}
-                >
-                    Next
-                    <ChevronRight className="w-5 h-5" />
-                </button>
-            </div>
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange}/>
         </div>
     );
 }

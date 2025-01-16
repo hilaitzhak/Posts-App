@@ -30,6 +30,16 @@ export interface PostsPageProps {
     setPosts: (posts: IPost[]) => void;
 }
 
+export interface PostDetailPageProps {
+    posts: IPost[]
+}
+
 export interface LoadingSpinnerProps {
     message?: string;
+}
+
+export interface PaginationProps {
+    currentPage: number;
+    totalPages: number;
+    onPageChange: (page: number) => void;
 }

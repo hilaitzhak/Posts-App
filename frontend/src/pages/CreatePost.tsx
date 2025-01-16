@@ -9,11 +9,8 @@ function CreatePost({ addPost }: CreatePostProps) {
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
   const [loading, setLoading] = useState(false);
-  const [notification, setNotification] = useState<{
-    show: boolean;
-    type: 'success' | 'error';
-    message: string;
-  }>({
+  const [notification, setNotification] = useState<{show: boolean; type: 'success' | 'error'; message: string;}>
+  ({
     show: false,
     type: 'success',
     message: ''
@@ -36,7 +33,6 @@ function CreatePost({ addPost }: CreatePostProps) {
 
     try {
       const response = await axios.post(`${BASE_URL}/posts`, newPost);
-      console.log('response.data:', response.data);
       addPost(response.data || newPost);
       setNotification({ show: true, type: 'success', message: 'Post created successfully!' });
 
