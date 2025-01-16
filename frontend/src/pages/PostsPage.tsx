@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PostCard from "../components/PostCard";
 import { PostsPageProps } from "../interfaces/interace";
 import axios from "axios";
@@ -12,6 +12,7 @@ function PostsPage({ posts, setPosts }: PostsPageProps) {
     const [searchQuery, setSearchQuery] = useState('');
     const [ loading, setLoading ] = useState<boolean>(true);
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
     const postPerPage = 20;
 
     useEffect(() => {
@@ -45,7 +46,12 @@ function PostsPage({ posts, setPosts }: PostsPageProps) {
     
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
     };
 
     if (loading) {
@@ -55,7 +61,7 @@ function PostsPage({ posts, setPosts }: PostsPageProps) {
     }
 
     return (
-        <div className="max-w-4xl mx-auto p-4">
+        <div className="max-w-4xl mx-auto p-4 h-screen flex flex-col">
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold">Posts List</h1>
                 <Link
@@ -66,10 +72,13 @@ function PostsPage({ posts, setPosts }: PostsPageProps) {
                 </Link>
             </div>
             <SearchBar onSearch={setSearchQuery}/>
-            <div className="grid gap-4 md:grid-cols-2">
-                {currentPosts.map((post) => (
-                    <PostCard key={post.id} post={post}/>
-                ))}
+
+            <div ref={scrollContainerRef} className="flex-1 overflow-auto my-4 rounded-lg">
+                <div className="grid gap-4 md:grid-cols-2">
+                    {currentPosts.map((post) => (
+                        <PostCard key={post.id} post={post}/>
+                    ))}
+                </div>
             </div>
 
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange}/>
