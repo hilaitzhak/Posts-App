@@ -1,4 +1,4 @@
-import { SearchBarProps } from "../interfaces/post";
+import { SearchBarProps } from "../interfaces/interace";
 
 function SearchBar({onSearch}: SearchBarProps) {
     return (

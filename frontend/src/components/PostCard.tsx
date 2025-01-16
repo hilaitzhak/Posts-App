@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IPostCardProps } from "../interfaces/post";
+import { IPostCardProps } from "../interfaces/interace";
 
 function PostCard({post}: IPostCardProps) {
     return (

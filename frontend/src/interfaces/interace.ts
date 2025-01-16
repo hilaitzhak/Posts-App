@@ -29,3 +29,7 @@ export interface PostsPageProps {
     posts: IPost[];
     setPosts: (posts: IPost[]) => void;
 }
+
+export interface LoadingSpinnerProps {
+    message?: string;
+}

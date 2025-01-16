@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { IComment, IPost } from "../interfaces/post";
+import { IComment, IPost } from "../interfaces/interace";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function PostDetail() {
     const BASE_URL = 'https://jsonplaceholder.typicode.com';
@@ -35,11 +36,9 @@ function PostDetail() {
 
     if (loading) {
       return (
-        <div className="flex justify-center items-center min-h-screen">
-          <div className="text-xl">Loading...</div>
-        </div>
+        <LoadingSpinner/>
       );
-    }
+    }  
   
     if (error || !post) {
       return (
@@ -53,7 +52,7 @@ function PostDetail() {
             >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-200" />
             <span>Back to Posts</span>
-            </Link>
+          </Link>
         </div>
       );
     }

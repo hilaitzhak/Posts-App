@@ -3,7 +3,7 @@ import PostsPage from "./pages/PostsPage"
 import CreatePost from "./components/CreatePost"
 import PostDetailPage from "./pages/PostDetailPage"
 import { useState } from "react"
-import { IPost } from "./interfaces/post"
+import { IPost } from "./interfaces/interace"
 
 function App() {
   const [posts, setPosts] = useState<IPost[]>([]);

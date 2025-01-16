@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { CreatePostProps, IPost } from "../interfaces/post";
+import { CreatePostProps, IPost } from "../interfaces/interace";
 import { useNavigate } from "react-router-dom";
 
 function CreatePost({ addPost }: CreatePostProps) {
@@ -34,7 +34,6 @@ function CreatePost({ addPost }: CreatePostProps) {
       userId: 1,
     };
 
-    console.log('new post: ', newPost);
     try {
       const response = await axios.post(`${BASE_URL}/posts`, newPost);
       console.log('response.data:', response.data);
